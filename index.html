@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <style>
         /* ══════════════════════════════════════════
            CSS VARIABLES
@@ -1235,7 +1236,7 @@
 <section class="cta-section" id="contact">
     <div class="container">
         <div class="cta-divider anim-up"><span class="cta-divider-icon">&#10022;</span></div>
-        <h2 class="cta-headline anim-up">Let's Make Something Sweet Together</h2>
+        <h2 class="cta-headline anim-up" id="ctaHeadline">Let's Make Something Sweet Together</h2>
         <p class="cta-subheadline anim-up">Every order starts with a conversation. Tell us about your vision and we'll bring it to life &mdash; custom made just for you in Gilbert, AZ.</p>
 
         <div class="cta-badges anim-up">
@@ -1507,6 +1508,44 @@
             requestAnimationFrame(animate);
         }
         animate();
+    })();
+
+    // ── Confetti cannon burst on CTA headline scroll ──
+    (function() {
+        const headline = document.getElementById('ctaHeadline');
+        if (!headline || typeof confetti !== 'function') return;
+
+        const confettiObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    confetti({
+                        particleCount: 80,
+                        angle: 60,
+                        spread: 70,
+                        origin: { x: 0.3, y: 0.6 },
+                        colors: ['#C9908A', '#F2D0A9', '#3D1C02', '#D4AF6E', '#FAF3EC'],
+                        startVelocity: 45,
+                        decay: 0.92,
+                        gravity: 1,
+                        ticks: 200
+                    });
+                    confetti({
+                        particleCount: 80,
+                        angle: 120,
+                        spread: 70,
+                        origin: { x: 0.7, y: 0.6 },
+                        colors: ['#C9908A', '#F2D0A9', '#3D1C02', '#D4AF6E', '#FAF3EC'],
+                        startVelocity: 45,
+                        decay: 0.92,
+                        gravity: 1,
+                        ticks: 200
+                    });
+                    confettiObserver.unobserve(headline);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        confettiObserver.observe(headline);
     })();
 </script>
 
