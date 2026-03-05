@@ -346,45 +346,100 @@
         }
 
         /* ══════════════════════════════════════════
-           SECTION 2 — PHOTO CATEGORY TILES
+           SECTION 2 — UNIFIED GALLERY
            ══════════════════════════════════════════ */
-        .category-tiles { background: var(--white); }
-        .tiles-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+        .unified-gallery {
+            background: var(--cream);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 0h40v40H0z' fill='%23FFF8F0'/%3E%3Cpath d='M0 0h20v20H0zM20 20h20v20H20z' fill='%23FDF2F0' opacity='0.4'/%3E%3C/svg%3E");
         }
-        .tile {
+        .unified-gallery .section-title { color: var(--brown); }
+
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 44px;
+        }
+        .filter-btn {
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border: 2px solid var(--dusty-rose);
+            background: var(--white);
+            color: var(--dusty-rose);
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover {
+            background: var(--pink-light);
+            color: var(--brown);
+        }
+        .filter-btn.active {
+            background: var(--dusty-rose);
+            color: var(--white);
+            border-color: var(--dusty-rose);
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 200px;
+            gap: 16px;
+        }
+        .photo-cell {
             position: relative;
             border-radius: 16px;
             overflow: hidden;
-            aspect-ratio: 1;
             cursor: pointer;
+            opacity: 1;
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
-        .tile img {
+        .photo-cell.hidden {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+        .photo-cell.tall { grid-row: span 2; }
+        .photo-cell.wide { grid-column: span 2; }
+        .photo-cell.big { grid-column: span 2; grid-row: span 2; }
+
+        .photo-cell img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
             transition: transform 0.5s ease;
         }
-        .tile:hover img { transform: scale(1.08); }
-        .tile-overlay {
+        .photo-cell:hover img { transform: scale(1.06); }
+
+        .photo-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(62, 39, 35, 0.35);
+            background: rgba(232, 160, 191, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.3s ease;
+            opacity: 0;
+            transition: opacity 0.35s ease;
         }
-        .tile:hover .tile-overlay { background: rgba(62, 39, 35, 0.5); }
-        .tile-name {
-            font-family: 'Playfair Display', serif;
+        .photo-cell:hover .photo-overlay { opacity: 1; }
+        .photo-overlay-icon {
             color: var(--white);
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            letter-spacing: 1px;
+            font-size: 1.8rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .gallery-follow {
+            text-align: center;
+            margin-top: 48px;
         }
 
         /* ══════════════════════════════════════════
@@ -451,51 +506,7 @@
             line-height: 1.7;
         }
 
-        /* ══════════════════════════════════════════
-           SECTION 5 — GALLERY (Masonry)
-           ══════════════════════════════════════════ */
-        .gallery { background: var(--white); }
-        .gallery .section-title { color: var(--brown); }
-
-        .masonry {
-            columns: 4;
-            column-gap: 16px;
-        }
-        .masonry-item {
-            break-inside: avoid;
-            margin-bottom: 16px;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-        }
-        .masonry-item img {
-            width: 100%;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-        .masonry-item:hover img { transform: scale(1.06); }
-        .masonry-hover {
-            position: absolute;
-            inset: 0;
-            background: rgba(232, 160, 191, 0.45);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .masonry-item:hover .masonry-hover { opacity: 1; }
-        .masonry-heart {
-            font-size: 2.4rem;
-            color: var(--white);
-            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        .gallery-cta {
-            text-align: center;
-            margin-top: 48px;
-        }
+        /* (Old masonry gallery removed — now using unified gallery above) */
 
         /* ══════════════════════════════════════════
            SECTION 6 — ABOUT
@@ -1046,8 +1057,7 @@
         @media (max-width: 1024px) {
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .reviews-grid { grid-template-columns: repeat(2, 1fr); }
-            .tiles-grid { grid-template-columns: repeat(2, 1fr); }
-            .masonry { columns: 3; }
+            .photo-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
         @media (max-width: 768px) {
@@ -1079,13 +1089,10 @@
             .section-pad { padding: 72px 0; }
             .section-title { font-size: 2rem; }
 
-            .tiles-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .tile-name { font-size: 1.1rem; }
-
             .services-grid,
             .reviews-grid { grid-template-columns: 1fr; gap: 24px; }
 
-            .masonry { columns: 2; }
+            .photo-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
 
             .about-inner {
                 flex-direction: column;
@@ -1119,8 +1126,8 @@
             .hero-image { width: 200px; height: 200px; }
             .btn { padding: 14px 32px; font-size: 0.9rem; }
             .contact-form { padding: 28px 20px; }
-            .tiles-grid { grid-template-columns: 1fr; }
-            .masonry { columns: 1; }
+            .photo-grid { grid-template-columns: 1fr; grid-auto-rows: 200px; }
+            .photo-cell.tall, .photo-cell.wide, .photo-cell.big { grid-column: span 1; grid-row: span 1; }
         }
     </style>
 </head>
@@ -1184,44 +1191,94 @@
 </div>
 
 <!-- ════════════════════════════════════════
-     SECTION 2 — PHOTO CATEGORY TILES
+     SECTION 2 — UNIFIED GALLERY
      ════════════════════════════════════════ -->
-<section class="category-tiles section-pad" id="categories">
+<section class="unified-gallery section-pad" id="gallery">
     <div class="container">
-        <h2 class="section-title fade-in">Explore Our Creations</h2>
+        <h2 class="section-title fade-in">Our Creations</h2>
         <div class="divider"><span class="divider-icon">&#10047;</span></div>
-        <p class="section-subtitle fade-in">From custom cakes to party bundles, we bring your vision to life.</p>
-        <div class="tiles-grid">
-            <div class="tile fade-in">
-                <img src="https://source.unsplash.com/600x600/?custom+cake" alt="Custom Cakes" loading="lazy">
-                <div class="tile-overlay"><span class="tile-name">Custom Cakes</span></div>
+        <p class="section-subtitle fade-in">Every order is custom, handcrafted, and made with love.</p>
+
+        <div class="gallery-filters fade-in">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="cakes">Cakes</button>
+            <button class="filter-btn" data-filter="cupcakes">Cupcakes</button>
+            <button class="filter-btn" data-filter="cookies">Cookies</button>
+            <button class="filter-btn" data-filter="wedding">Wedding</button>
+            <button class="filter-btn" data-filter="bundles">Bundles</button>
+        </div>
+
+        <div class="photo-grid" id="photoGrid">
+            <!-- REPLACE WITH REAL PHOTO -->
+            <div class="photo-cell big fade-in" data-category="cakes">
+                <img src="https://picsum.photos/seed/jc-cake1/800/800" alt="Custom pink birthday cake" loading="lazy">
+                <div class="photo-overlay"><span class="photo-overlay-icon">&#10022;</span></div>
             </div>
-            <div class="tile fade-in">
-                <img src="https://source.unsplash.com/600x600/?decorated+cupcakes" alt="Cupcakes" loading="lazy">
-                <div class="tile-overlay"><span class="tile-name">Cupcakes</span></div>
+            <!-- REPLACE WITH REAL PHOTO -->
+            <div class="photo-cell tall fade-in" data-category="wedding">
+                <img src="https://picsum.photos/seed/jc-wedding1/500/700" alt="Elegant tiered wedding cake" loading="lazy">
+                <div class="photo-overlay"><span class="photo-overlay-icon">&#10022;</span></div>
             </div>
-            <div class="tile fade-in">
-                <img src="https://source.unsplash.com/600x600/?decorated+sugar+cookies" alt="Custom Cookies" loading="lazy">
-                <div class="tile-overlay"><span class="tile-name">Custom Cookies</span></div>
+            <!-- REPLACE WITH REAL PHOTO -->
+            <div class="photo-cell fade-in" data-category="cupcakes">
+                <img src="https://picsum.photos/seed/jc-cupcake1/500/500" alt="Decorated cupcakes" loading="lazy">
+                <div class="photo-overlay"><span class="photo-overlay-icon">&#10022;</span></div>
             </div>
-            <div class="tile fade-in">
-                <img src="https://source.unsplash.com/600x600/?wedding+cake" alt="Wedding Cakes" loading="lazy">
-                <div class="tile-overlay"><span class="tile-name">Wedding Cakes</span></div>
+            <!-- REPLACE WITH REAL PHOTO -->
+            <div class="photo-cell fade-in" data-category="cookies">
+                <img src="https://picsum.photos/seed/jc-cookie1/500/500" alt="Custom decorated sugar cookies" loading="lazy">
+                <div class="photo-overlay"><span class="photo-overlay-icon">&#10022;</span></div>
             </div>
-            <div class="tile fade-in">
-                <img src="https://source.unsplash.com/600x600/?birthday+party+desserts" alt="Party Bundles" loading="lazy">
-                <div class="tile-overlay"><span class="tile-name">Party Bundles</span></div>
+            <!-- REPLACE WITH REAL PHOTO -->
+            <div class="photo-cell wide fade-in" data-category="bundles">
+                <img src="https://picsum.photos/seed/jc-bundle1/800/400" alt="Party bundle spread" loading="lazy">
+                <div class="photo-overlay"><span class="photo-overlay-icon">&#10022;</span></div>
             </div>
-            <div class="tile fade-in">
-                <img src="https://source.unsplash.com/600x600/?party+cake+decorations" alt="Custom Decor" loading="lazy">
-                <div class="tile-overlay"><span class="tile-name">Custom D&eacute;cor</span></div>
+            <!-- REPLACE WITH REAL PHOTO -->
+            <div class="photo-cell tall fade-in" data-category="cakes">
+                <img src="https://picsum.photos/seed/jc-cake2/500/700" alt="Character birthday cake" loading="lazy">
+                <div class="photo-overlay"><span class="photo-overlay-icon">&#10022;</span></div>
             </div>
+            <!-- REPLACE WITH REAL PHOTO -->
+            <div class="photo-cell fade-in" data-category="cupcakes">
+                <img src="https://picsum.photos/seed/jc-cupcake2/500/500" alt="Themed cupcakes" loading="lazy">
+                <div class="photo-overlay"><span class="photo-overlay-icon">&#10022;</span></div>
+            </div>
+            <!-- REPLACE WITH REAL PHOTO -->
+            <div class="photo-cell fade-in" data-category="cookies">
+                <img src="https://picsum.photos/seed/jc-cookie2/500/500" alt="Royal icing cookies" loading="lazy">
+                <div class="photo-overlay"><span class="photo-overlay-icon">&#10022;</span></div>
+            </div>
+            <!-- REPLACE WITH REAL PHOTO -->
+            <div class="photo-cell fade-in" data-category="wedding">
+                <img src="https://picsum.photos/seed/jc-wedding2/500/500" alt="White tiered wedding cake" loading="lazy">
+                <div class="photo-overlay"><span class="photo-overlay-icon">&#10022;</span></div>
+            </div>
+            <!-- REPLACE WITH REAL PHOTO -->
+            <div class="photo-cell wide fade-in" data-category="cakes">
+                <img src="https://picsum.photos/seed/jc-cake3/800/400" alt="Celebration cake" loading="lazy">
+                <div class="photo-overlay"><span class="photo-overlay-icon">&#10022;</span></div>
+            </div>
+            <!-- REPLACE WITH REAL PHOTO -->
+            <div class="photo-cell fade-in" data-category="bundles">
+                <img src="https://picsum.photos/seed/jc-bundle2/500/500" alt="Cupcake and cookie bundle" loading="lazy">
+                <div class="photo-overlay"><span class="photo-overlay-icon">&#10022;</span></div>
+            </div>
+            <!-- REPLACE WITH REAL PHOTO -->
+            <div class="photo-cell tall fade-in" data-category="cupcakes">
+                <img src="https://picsum.photos/seed/jc-cupcake3/500/700" alt="Mini cupcakes tower" loading="lazy">
+                <div class="photo-overlay"><span class="photo-overlay-icon">&#10022;</span></div>
+            </div>
+        </div>
+
+        <div class="gallery-follow fade-in">
+            <a href="https://instagram.com/jessicakes_bakery_az" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Follow Us for More @jessicakes_bakery_az</a>
         </div>
     </div>
 </section>
 
 <!-- ════════════════════════════════════════
-     SECTION 3 — SCROLLING REVIEW MARQUEE
+     SCROLLING REVIEW MARQUEE
      ════════════════════════════════════════ -->
 <div class="review-marquee">
     <div class="review-marquee-track">
@@ -1247,118 +1304,47 @@
         <p class="section-subtitle fade-in">Every creation is made from scratch with premium ingredients and a whole lot of love.</p>
         <div class="services-grid">
             <div class="service-card fade-in">
-                <img class="service-card-img" src="https://source.unsplash.com/600x400/?custom+cake" alt="Custom Cakes" loading="lazy">
+                <img class="service-card-img" src="" alt="Custom Cakes" loading="lazy">
                 <div class="service-card-body">
                     <h3>Custom Cakes</h3>
                     <p>From elegant tiered wedding cakes to fun birthday creations, every cake is designed around your vision. Choose your flavors, fillings, and frosting &mdash; we handle the rest.</p>
                 </div>
             </div>
             <div class="service-card fade-in">
-                <img class="service-card-img" src="https://source.unsplash.com/600x400/?decorated+cupcakes" alt="Cupcakes" loading="lazy">
+                <img class="service-card-img" src="" alt="Cupcakes" loading="lazy">
                 <div class="service-card-body">
                     <h3>Cupcakes</h3>
                     <p>Beautifully decorated cupcakes made to match any theme or color scheme. Perfect for parties, events, or just because.</p>
                 </div>
             </div>
             <div class="service-card fade-in">
-                <img class="service-card-img" src="https://source.unsplash.com/600x400/?decorated+sugar+cookies" alt="Custom Cookies" loading="lazy">
+                <img class="service-card-img" src="" alt="Custom Cookies" loading="lazy">
                 <div class="service-card-body">
                     <h3>Custom Cookies</h3>
                     <p>Decorated sugar cookies by the dozen or half dozen, individually packaged to match your event theme. Pricing varies based on design complexity.</p>
                 </div>
             </div>
             <div class="service-card fade-in">
-                <img class="service-card-img" src="https://source.unsplash.com/600x400/?wedding+cake" alt="Wedding Cakes" loading="lazy">
+                <img class="service-card-img" src="" alt="Wedding Cakes" loading="lazy">
                 <div class="service-card-body">
                     <h3>Wedding &amp; Bridal Cakes</h3>
                     <p>Your wedding cake should be as unforgettable as your day. We create elegant, custom bridal cakes that taste as incredible as they look.</p>
                 </div>
             </div>
             <div class="service-card fade-in">
-                <img class="service-card-img" src="https://source.unsplash.com/600x400/?birthday+party+desserts" alt="Party Bundles" loading="lazy">
+                <img class="service-card-img" src="" alt="Party Bundles" loading="lazy">
                 <div class="service-card-body">
                     <h3>Party Bundles</h3>
                     <p>Our most popular option! Get everything you need in one package &mdash; custom cake, cupcakes, cookies, and matching d&eacute;cor. Bundles start at $150&ndash;$175.</p>
                 </div>
             </div>
             <div class="service-card fade-in">
-                <img class="service-card-img" src="https://source.unsplash.com/600x400/?party+cake+decorations" alt="Custom Decor" loading="lazy">
+                <img class="service-card-img" src="" alt="Custom Decor" loading="lazy">
                 <div class="service-card-body">
                     <h3>Custom D&eacute;cor &amp; Goods</h3>
                     <p>Complete your party look with custom decorations designed to match your baked goods &mdash; including cake toppers, banners, cupcake toppers, and more.</p>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- Wave Divider -->
-<div class="wave-divider">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
-        <path d="M0,0 C360,60 1080,0 1440,60 L1440,60 L0,60 Z" fill="#FFFFFF"/>
-    </svg>
-</div>
-
-<!-- ════════════════════════════════════════
-     SECTION 5 — GALLERY (Masonry)
-     ════════════════════════════════════════ -->
-<section class="gallery section-pad" id="gallery">
-    <div class="container">
-        <h2 class="section-title fade-in">A Peek Inside Our Kitchen &#127874;</h2>
-        <div class="divider"><span class="divider-icon">&#10047;</span></div>
-        <p class="section-subtitle fade-in">Every treat is handcrafted with care, creativity, and a touch of magic.</p>
-        <div class="masonry">
-            <div class="masonry-item fade-in">
-                <img src="https://source.unsplash.com/400x500/?custom+cake+pink" alt="Custom cake" loading="lazy">
-                <div class="masonry-hover"><span class="masonry-heart">&hearts;</span></div>
-            </div>
-            <div class="masonry-item fade-in">
-                <img src="https://source.unsplash.com/400x300/?decorated+cupcakes+party" alt="Cupcakes" loading="lazy">
-                <div class="masonry-hover"><span class="masonry-heart">&hearts;</span></div>
-            </div>
-            <div class="masonry-item fade-in">
-                <img src="https://source.unsplash.com/400x400/?sugar+cookies+decorated" alt="Decorated cookies" loading="lazy">
-                <div class="masonry-hover"><span class="masonry-heart">&hearts;</span></div>
-            </div>
-            <div class="masonry-item fade-in">
-                <img src="https://source.unsplash.com/400x600/?wedding+cake+elegant" alt="Wedding cake" loading="lazy">
-                <div class="masonry-hover"><span class="masonry-heart">&hearts;</span></div>
-            </div>
-            <div class="masonry-item fade-in">
-                <img src="https://source.unsplash.com/400x500/?custom+birthday+cake" alt="Birthday cake" loading="lazy">
-                <div class="masonry-hover"><span class="masonry-heart">&hearts;</span></div>
-            </div>
-            <div class="masonry-item fade-in">
-                <img src="https://source.unsplash.com/400x300/?cupcakes+frosting" alt="Cupcakes with frosting" loading="lazy">
-                <div class="masonry-hover"><span class="masonry-heart">&hearts;</span></div>
-            </div>
-            <div class="masonry-item fade-in">
-                <img src="https://source.unsplash.com/400x400/?royal+icing+cookies" alt="Icing cookies" loading="lazy">
-                <div class="masonry-hover"><span class="masonry-heart">&hearts;</span></div>
-            </div>
-            <div class="masonry-item fade-in">
-                <img src="https://source.unsplash.com/400x600/?tiered+wedding+cake" alt="Tiered wedding cake" loading="lazy">
-                <div class="masonry-hover"><span class="masonry-heart">&hearts;</span></div>
-            </div>
-            <div class="masonry-item fade-in">
-                <img src="https://source.unsplash.com/400x500/?custom+cake+celebration" alt="Celebration cake" loading="lazy">
-                <div class="masonry-hover"><span class="masonry-heart">&hearts;</span></div>
-            </div>
-            <div class="masonry-item fade-in">
-                <img src="https://source.unsplash.com/400x300/?mini+cupcakes" alt="Mini cupcakes" loading="lazy">
-                <div class="masonry-hover"><span class="masonry-heart">&hearts;</span></div>
-            </div>
-            <div class="masonry-item fade-in">
-                <img src="https://source.unsplash.com/400x400/?decorated+cookies+event" alt="Event cookies" loading="lazy">
-                <div class="masonry-hover"><span class="masonry-heart">&hearts;</span></div>
-            </div>
-            <div class="masonry-item fade-in">
-                <img src="https://source.unsplash.com/400x600/?white+wedding+cake" alt="White wedding cake" loading="lazy">
-                <div class="masonry-hover"><span class="masonry-heart">&hearts;</span></div>
-            </div>
-        </div>
-        <div class="gallery-cta fade-in">
-            <a href="https://instagram.com/jessicakes_bakery_az" target="_blank" rel="noopener noreferrer" class="btn btn-pink">Follow Us on Instagram @jessicakes_bakery_az</a>
         </div>
     </div>
 </section>
@@ -1377,7 +1363,7 @@
     <div class="container">
         <div class="about-inner">
             <div class="about-photo fade-in-left">
-                <img src="https://source.unsplash.com/500x600/?baker+woman+kitchen" alt="Jessica, the baker behind JESSICakes" loading="lazy">
+                <img src="" alt="Jessica, the baker behind JESSICakes" loading="lazy">
             </div>
             <div class="about-text fade-in-right">
                 <h2>Meet the Baker Behind the Magic</h2>
@@ -1678,27 +1664,10 @@
             'Wedding & Bridal Cakes': { emoji: '💍', grad: ['#FFFFFF','#F5D5E0'], accent: '#D4B87A' },
             'Custom Décor & Goods':   { emoji: '🎀', grad: ['#FFF8F0','#FFF0F5'], accent: '#C9A96E' },
         };
-        const galleryEmojis = ['🎂','🧁','🍪','💒','🎉','✨','🎀','🍰','🎈','💝','🌸','🎊'];
-        const galleryGrads = [
-            ['#F5D5E0','#FFF0F5'], ['#FFF0F5','#F5D5E0'], ['#FFF8F0','#F5D5E0'],
-            ['#FFFFFF','#F5D5E0'], ['#F5D5E0','#FFF8F0'], ['#FFF8F0','#FFF0F5'],
-            ['#FFF0F5','#FFF8F0'], ['#F5D5E0','#FFFFFF'], ['#FFF8F0','#FFFFFF'],
-            ['#FFF0F5','#F5D5E0'], ['#F5D5E0','#FFF0F5'], ['#FFFFFF','#FFF8F0']
-        ];
-        const galleryAccents = ['#E8A0BF','#C48B9F','#C9A96E','#D4B87A','#E8A0BF','#C9A96E',
-                                '#C48B9F','#D4B87A','#E8A0BF','#C48B9F','#C9A96E','#D4B87A'];
 
         function makeSVG(w, h, emoji, label, grad, accent) {
             return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${grad[0]}"/><stop offset="100%" stop-color="${grad[1]}"/></linearGradient></defs><rect width="${w}" height="${h}" fill="url(#g)"/><text x="${w/2}" y="${h/2 - 10}" text-anchor="middle" font-size="${Math.min(w,h)*0.18}" dominant-baseline="central">${emoji}</text><text x="${w/2}" y="${h/2 + Math.min(w,h)*0.14}" text-anchor="middle" font-family="Georgia,serif" font-size="${Math.min(w,h)*0.065}" fill="${accent}" font-style="italic">${label}</text></svg>`)}`;
         }
-
-        // Fix tile images
-        document.querySelectorAll('.tile').forEach(tile => {
-            const img = tile.querySelector('img');
-            const name = tile.querySelector('.tile-name')?.textContent?.trim() || 'Sweet Treat';
-            const t = themes[name] || { emoji: '🍰', grad: ['#F5D5E0','#FFF0F5'], accent: '#E8A0BF' };
-            img.src = makeSVG(600, 600, t.emoji, name, t.grad, t.accent);
-        });
 
         // Fix service card images
         document.querySelectorAll('.service-card').forEach(card => {
@@ -1708,22 +1677,34 @@
             img.src = makeSVG(600, 400, t.emoji, name, t.grad, t.accent);
         });
 
-        // Fix gallery / masonry images
-        document.querySelectorAll('.masonry-item').forEach((item, i) => {
-            const img = item.querySelector('img');
-            const idx = i % galleryEmojis.length;
-            const labels = ['Custom Cake','Cupcakes','Decorated Cookies','Wedding Cake','Birthday Cake',
-                           'Frosted Cupcakes','Royal Icing Cookies','Tiered Cake','Celebration Cake',
-                           'Mini Cupcakes','Event Cookies','White Wedding Cake'];
-            const heights = [500,300,400,600,500,300,400,600,500,300,400,600];
-            img.src = makeSVG(400, heights[idx], galleryEmojis[idx], labels[idx] || 'Sweet Treat', galleryGrads[idx], galleryAccents[idx]);
-        });
-
         // Fix about photo
         const aboutImg = document.querySelector('.about-photo img');
         if (aboutImg) {
             aboutImg.src = makeSVG(500, 600, '👩‍🍳', 'Meet Jessica', ['#FFF0F5','#F5D5E0'], '#C48B9F');
         }
+    })();
+
+    // ── Gallery filter buttons ──
+    (function() {
+        const buttons = document.querySelectorAll('.filter-btn');
+        const cells = document.querySelectorAll('.photo-cell');
+        const grid = document.getElementById('photoGrid');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+
+                cells.forEach(cell => {
+                    if (filter === 'all' || cell.dataset.category === filter) {
+                        cell.classList.remove('hidden');
+                    } else {
+                        cell.classList.add('hidden');
+                    }
+                });
+            });
+        });
     })();
 
     // ── Navigation scroll effect ──
