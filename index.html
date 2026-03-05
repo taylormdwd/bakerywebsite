@@ -524,18 +524,34 @@
         }
         .about-stats {
             display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 0;
         }
         .about-stat {
-            background: var(--white);
-            padding: 14px 24px;
-            border-radius: 50px;
-            font-size: 0.9rem;
+            text-align: center;
+            padding: 0 36px;
+        }
+        .about-stat:first-child { padding-left: 0; }
+        .about-stat:last-child { padding-right: 0; }
+        .about-stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--brown);
-            box-shadow: var(--shadow);
-            border: 1px solid var(--pink-light);
+            line-height: 1.2;
+        }
+        .about-stat-label {
+            font-size: 0.82rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--brown-mid);
+            line-height: 1.4;
+        }
+        .about-stat-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--gold);
+            flex-shrink: 0;
         }
 
         /* ══════════════════════════════════════════
@@ -556,42 +572,49 @@
             gap: 32px;
         }
         .review-card {
-            background: var(--white);
+            background: var(--brown);
             border-radius: 20px;
-            padding: 40px 32px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--pink-light);
+            padding: 44px 36px;
+            box-shadow: 0 10px 40px rgba(62, 39, 35, 0.25);
             position: relative;
             transition: transform 0.3s ease;
         }
         .review-card:hover { transform: translateY(-4px); }
         .review-quote {
             font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            color: var(--pink);
+            font-size: 60px;
+            color: var(--gold);
             line-height: 1;
-            margin-bottom: 8px;
-            opacity: 0.5;
+            margin-bottom: 4px;
+            opacity: 0.25;
         }
         .review-stars {
             color: var(--gold);
-            font-size: 1.2rem;
-            margin-bottom: 16px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
             letter-spacing: 3px;
         }
         .review-text {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: var(--text-light);
-            margin-bottom: 20px;
+            font-size: 1.02rem;
+            line-height: 1.85;
+            color: var(--cream);
+            margin-bottom: 24px;
             font-style: italic;
         }
+        .review-author-line {
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto 16px;
+        }
         .review-author {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 0.95rem;
-            color: var(--gold);
-            font-weight: 600;
+            font-family: 'Lato', sans-serif;
+            font-style: normal;
+            font-size: 0.88rem;
+            color: rgba(255, 248, 240, 0.7);
+            font-weight: 400;
+            text-align: center;
+            letter-spacing: 0.5px;
         }
 
         /* ══════════════════════════════════════════
@@ -901,7 +924,9 @@
                 margin: 0 auto;
             }
             .about-photo img { height: 380px; }
-            .about-stats { justify-content: center; }
+            .about-stats { justify-content: center; flex-wrap: wrap; gap: 20px; }
+            .about-stat-divider { display: none; }
+            .about-stat { padding: 0 20px; }
 
             .cta-section { padding: 80px 0; }
             .cta-headline { font-size: 2rem; }
@@ -1136,9 +1161,20 @@
                 <p>I'm Jessica &mdash; the baker, decorator, and creative mind behind JESSICakes in Gilbert, AZ. What started as a love for baking has grown into a one-stop shop for custom cakes, cookies, and party planning. I believe every celebration deserves something handmade, personal, and beautiful &mdash; without breaking the bank.</p>
                 <span class="about-sig">&mdash; Jessica</span>
                 <div class="about-stats">
-                    <div class="about-stat">&#127874; 100+ Custom Cakes</div>
-                    <div class="about-stat">&#11088; 5-Star Rated</div>
-                    <div class="about-stat">&#128149; Gilbert's Favorite Bakery</div>
+                    <div class="about-stat">
+                        <div class="about-stat-number">100+</div>
+                        <div class="about-stat-label">Custom Orders</div>
+                    </div>
+                    <div class="about-stat-divider"></div>
+                    <div class="about-stat">
+                        <div class="about-stat-number">5-Star</div>
+                        <div class="about-stat-label">Rated on Yelp</div>
+                    </div>
+                    <div class="about-stat-divider"></div>
+                    <div class="about-stat">
+                        <div class="about-stat-number">Gilbert, AZ</div>
+                        <div class="about-stat-label">Locally Loved</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1165,18 +1201,21 @@
                 <div class="review-quote">&ldquo;</div>
                 <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                 <p class="review-text">"I highly recommend JESSICakes if you are looking for a custom cake at a fair price. The quality is amazing and everything looked and tasted incredible!"</p>
+                <div class="review-author-line"></div>
                 <div class="review-author">&mdash; Happy Customer, Gilbert AZ</div>
             </div>
             <div class="review-card anim-up" data-stagger="1">
                 <div class="review-quote">&ldquo;</div>
                 <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                 <p class="review-text">"She made the most beautiful cake for my daughter's birthday. It came out even better than I imagined. Will definitely be ordering again!"</p>
+                <div class="review-author-line"></div>
                 <div class="review-author">&mdash; Verified Customer</div>
             </div>
             <div class="review-card anim-up" data-stagger="2">
                 <div class="review-quote">&ldquo;</div>
                 <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                 <p class="review-text">"Best custom cookies I've ever ordered. Packaged beautifully and tasted amazing. Everyone at the party was obsessed."</p>
+                <div class="review-author-line"></div>
                 <div class="review-author">&mdash; Local Gilbert Customer</div>
             </div>
         </div>
