@@ -726,108 +726,7 @@
         }
 
         /* ══════════════════════════════════════════
-           SECTION 10 — BUNDLE HIGHLIGHT
-           ══════════════════════════════════════════ */
-        .bundle {
-            background: var(--brown);
-            color: var(--cream);
-            position: relative;
-            overflow: hidden;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 5 C30 5 33 12 30 15 C27 12 30 5 30 5z M25 20 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0' fill='none' stroke='rgba(201,169,110,0.08)' stroke-width='1'/%3E%3C/svg%3E");
-        }
-        .bundle .section-title { color: var(--cream); }
-        .bundle-card {
-            max-width: 860px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .bundle-emoji { font-size: 3rem; margin-bottom: 16px; }
-        .bundle-card h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.4rem;
-            color: var(--gold);
-            margin-bottom: 16px;
-        }
-        .bundle-card > p {
-            color: rgba(255,248,240,0.8);
-            font-size: 1.05rem;
-            max-width: 600px;
-            margin: 0 auto 28px;
-            line-height: 1.8;
-        }
-        .bundle-list {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 14px 20px;
-            margin-bottom: 28px;
-        }
-        .bundle-list li {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1rem;
-            color: var(--cream);
-        }
-        .bundle-list li::before {
-            content: '✓';
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--gold);
-            color: var(--brown);
-            font-size: 0.75rem;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-        .bundle-price {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--gold);
-            margin-bottom: 32px;
-            font-weight: 700;
-        }
-
-        /* ══════════════════════════════════════════
-           SECTION 11 — FLAVORS STRIP
-           ══════════════════════════════════════════ */
-        .flavors {
-            background: var(--blush);
-            padding: 72px 0;
-        }
-        .flavors .section-title { color: var(--brown); font-size: 2rem; }
-        .flavor-tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 14px;
-            margin-top: 36px;
-        }
-        .flavor-tag {
-            padding: 10px 28px;
-            border-radius: 50px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-        .flavor-tag:nth-child(odd) {
-            background: var(--pink-light);
-            color: var(--brown);
-        }
-        .flavor-tag:nth-child(even) {
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
-            color: var(--white);
-        }
-        .flavor-tag:hover { transform: scale(1.08); }
-
-        /* ══════════════════════════════════════════
-           SECTION 12 — CONTACT / ORDER FORM
+           CONTACT / ORDER FORM
            ══════════════════════════════════════════ */
         .contact {
             background: var(--pink-pale);
@@ -1145,7 +1044,6 @@
             <li><a href="#about">About</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#reviews">Reviews</a></li>
-            <li><a href="#bundle">Bundles</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
@@ -1325,10 +1223,10 @@
                 </div>
             </div>
             <div class="service-card fade-in">
-                <img class="service-card-img" src="" alt="Wedding Cakes" loading="lazy">
+                <img class="service-card-img" src="" alt="Cookie Bouquets" loading="lazy">
                 <div class="service-card-body">
-                    <h3>Wedding &amp; Bridal Cakes</h3>
-                    <p>Your wedding cake should be as unforgettable as your day. We create elegant, custom bridal cakes that taste as incredible as they look.</p>
+                    <h3>Cookie Bouquets</h3>
+                    <p>Custom decorated sugar cookies arranged into a stunning bouquet. Starting at $30, individually packaged and designed to match your event theme. Perfect for gifts, parties, and special occasions.</p>
                 </div>
             </div>
             <div class="service-card fade-in">
@@ -1463,65 +1361,7 @@
     </div>
 </section>
 
-<!-- Wave Divider -->
-<div class="wave-divider">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
-        <path d="M0,0 C360,60 1080,0 1440,60 L1440,60 L0,60 Z" fill="#3E2723"/>
-    </svg>
-</div>
-
-<!-- ════════════════════════════════════════
-     SECTION 10 — BUNDLE HIGHLIGHT
-     ════════════════════════════════════════ -->
-<section class="bundle section-pad" id="bundle">
-    <div class="container">
-        <div class="bundle-card fade-in">
-            <div class="bundle-emoji">&#127881;</div>
-            <h2>The Ultimate Party Bundle</h2>
-            <p>Get everything you need for your next celebration in one easy package. Book a free consultation to customize yours!</p>
-            <ul class="bundle-list">
-                <li>2 Dozen Cupcakes</li>
-                <li>8" Smash Cake</li>
-                <li>10" Custom Layer Cake</li>
-                <li>2 Dozen Custom Cookies</li>
-                <li>Matching Custom D&eacute;cor</li>
-            </ul>
-            <div class="bundle-price">Starting at just $150&ndash;$175</div>
-            <a href="#contact" class="btn btn-gold">Get Your Bundle</a>
-        </div>
-    </div>
-</section>
-
-<!-- Wave Divider -->
-<div class="wave-divider">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
-        <path d="M0,60 C480,0 960,60 1440,0 L1440,60 L0,60 Z" fill="#FDF2F0"/>
-    </svg>
-</div>
-
-<!-- ════════════════════════════════════════
-     SECTION 11 — FLAVORS STRIP
-     ════════════════════════════════════════ -->
-<section class="flavors" id="flavors">
-    <div class="container">
-        <h2 class="section-title fade-in">Our Most Loved Flavors</h2>
-        <div class="divider"><span class="divider-icon">&#10047;</span></div>
-        <div class="flavor-tags fade-in">
-            <span class="flavor-tag">Vanilla Bean</span>
-            <span class="flavor-tag">Red Velvet</span>
-            <span class="flavor-tag">Lemon</span>
-            <span class="flavor-tag">Chocolate Fudge</span>
-            <span class="flavor-tag">Strawberry</span>
-            <span class="flavor-tag">Funfetti</span>
-            <span class="flavor-tag">Salted Caramel</span>
-            <span class="flavor-tag">Marble</span>
-            <span class="flavor-tag">Champagne</span>
-            <span class="flavor-tag">Coconut</span>
-        </div>
-    </div>
-</section>
-
-<!-- Wave Divider -->
+<!-- Wave Divider into Contact -->
 <div class="wave-divider">
     <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
         <path d="M0,0 C360,60 1080,0 1440,60 L1440,60 L0,60 Z" fill="#FFF0F5"/>
@@ -1603,8 +1443,15 @@
     </div>
 </section>
 
+<!-- Footer Wave -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+        <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#3E2723"/>
+    </svg>
+</div>
+
 <!-- ════════════════════════════════════════
-     SECTION 13 — FOOTER
+     FOOTER
      ════════════════════════════════════════ -->
 <footer class="footer" id="footer">
     <div class="container">
@@ -1619,7 +1466,6 @@
                     <li><a href="#gallery">Gallery</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#reviews">Reviews</a></li>
-                    <li><a href="#bundle">Bundles</a></li>
                     <li><a href="#contact">Order Now</a></li>
                 </ul>
             </div>
@@ -1658,10 +1504,9 @@
             'Custom Cakes':    { emoji: '🎂', grad: ['#F5D5E0','#FFF0F5'], accent: '#E8A0BF' },
             'Cupcakes':        { emoji: '🧁', grad: ['#FFF0F5','#F5D5E0'], accent: '#C48B9F' },
             'Custom Cookies':  { emoji: '🍪', grad: ['#FFF8F0','#F5D5E0'], accent: '#C9A96E' },
-            'Wedding Cakes':   { emoji: '💒', grad: ['#FFFFFF','#F5D5E0'], accent: '#D4B87A' },
+            'Cookie Bouquets':  { emoji: '💐', grad: ['#FFF0F5','#F5D5E0'], accent: '#C48B9F' },
             'Party Bundles':   { emoji: '🎉', grad: ['#F5D5E0','#FFF8F0'], accent: '#E8A0BF' },
             'Custom Décor':    { emoji: '✨', grad: ['#FFF8F0','#FFF0F5'], accent: '#C9A96E' },
-            'Wedding & Bridal Cakes': { emoji: '💍', grad: ['#FFFFFF','#F5D5E0'], accent: '#D4B87A' },
             'Custom Décor & Goods':   { emoji: '🎀', grad: ['#FFF8F0','#FFF0F5'], accent: '#C9A96E' },
         };
 
